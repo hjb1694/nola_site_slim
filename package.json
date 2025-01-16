@@ -1,0 +1,21 @@
+{
+  "name": "nola",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "sass:build": "sass --style=compressed ./src/scss/main.scss ./public/assets/style/main.css",
+    "sass:watch": "sass --watch --style=compressed ./src/scss/main.scss ./public/assets/style/main.css"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Hayden Bradfield",
+    "email": "me@haydenbradfield.com",
+    "url": "https://www.haydenbradfield.com"
+  },
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.83.4"
+  }
+}
