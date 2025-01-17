@@ -291,9 +291,17 @@ a.link-btn:link,
 .testimonial {
     background: #333;
     padding: 10rem 2rem;
-    display:flex;
-    flex-direction: column;
+    display: flex;
     align-items: center;
+    justify-content: center;
+
+    &__slide-contents {
+        width:100%;
+        display:flex;
+        flex-direction: column;
+        align-items: center !important;
+        z-index: 10;
+    }
 
     &__text {
         font-size: 2rem;
@@ -311,6 +319,25 @@ a.link-btn:link,
     &__person-title {
         color: #bbb;
     }
+}
+
+
+.swiper {
+    width:100%;
+    max-width:100%;
+    min-height: 25rem;
+}
+
+.swiper-wrapper {
+    width:100%;
+    max-width:100%;
+    min-height: 25rem;
+}
+
+.swiper-slide {
+    width:100%;
+    max-width:100%;
+    min-height: 25rem;
 }
 
 
@@ -806,6 +833,23 @@ a.link-btn:link,
         }
 
     }
+
+}
+
+@media (max-width: 650px) {
+
+    .swiper {
+        min-height:50rem;
+    }
+
+    .swiper-wrapper {
+        min-height:50rem;
+    }
+
+    .swiper-slide {
+        min-height:50rem;
+    }
+
 }
 
 
