@@ -143,7 +143,7 @@
                 fd.append('subject', fields.subject.value.trim());
                 fd.append('message_contents', fields.messageBody.value.trim());
 
-                const response = await fetch('/process_contact_form.php', {
+                const response = await fetch('/process-contact-form', {
                     mode: 'no-cors',
                     method: 'POST',
                     body: fd
