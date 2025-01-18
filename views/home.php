@@ -188,7 +188,7 @@
         <p>Custom website by <a href="https://www.haydenbradfield.com/">Hayden Bradfield</a></p>
     </footer>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="/public/assets/vendor/countUp.umd.js"></script>
+    <script src="/public/assets/js/countUp.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
 

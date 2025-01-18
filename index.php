@@ -9,7 +9,7 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = DotEnv::createImmutable(__DIR__);
 $dotenv->load();
 
-require 'router.php';
+require './router/router.php';
 
 $app = AppFactory::create();
 

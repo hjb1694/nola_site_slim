@@ -2,9 +2,9 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-require "db_connection.php";
-require "handle_incoming_input.php";
-require "send_contact_mail.php";
+require __DIR__ . "/../util/db_connection.php";
+require __DIR__ . "/../util/handle_incoming_input.php";
+require __DIR__ . "/../util/send_contact_mail.php";
 
 function use_router($app, $renderer){
 
