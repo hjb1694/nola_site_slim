@@ -3,3 +3,4 @@ vendor/
 hold/
 bin/
 .env
+.DS_Store
