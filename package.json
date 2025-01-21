@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "sass:build": "sass --style=compressed ./src/scss/main.scss ./public/assets/style/main.css",
-    "sass:watch": "sass --watch --style=compressed ./src/scss/main.scss ./public/assets/style/main.css"
+    "sass:watch": "sass --watch --style=compressed ./src/scss/main.scss ./public/assets/style/main.css",
+    "terser:build:home": "terser ./src/js/home.js -c --output ./public/assets/js/home.min.js",
+    "terser:build:contact": "terser ./src/js/contact.js -c --output ./public/assets/js/contact.min.js",
+    "terser:build:consultation": "terser ./src/js/consultation.js -c --output ./public/assets/js/consultation.min.js",
+    "terser:build:all": "concurrently 'npm run terser:build:home' 'npm run terser:build:contact' 'npm run terser:build:consultation'"
   },
   "keywords": [],
   "author": {
@@ -16,6 +20,8 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "sass": "^1.83.4"
+    "concurrently": "^9.1.2",
+    "sass": "^1.83.4",
+    "terser": "^5.37.0"
   }
 }
