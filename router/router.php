@@ -1,26 +1,27 @@
 <?php
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Views\Twig;
 
 require __DIR__ . "/../util/db_connection.php";
 require __DIR__ . "/../util/handle_incoming_input.php";
 require __DIR__ . "/../util/send_contact_mail.php";
 
-function use_router($app, $renderer){
+function use_router($app){
 
     $app->get('/', function (Request $request, Response $response, $args) {
-        global $renderer;
-        return $renderer->render($response, 'home.php');
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'home.page.twig');
     });
     
     $app->get('/contact', function (Request $request, Response $response) {
-        global $renderer;
-        return $renderer->render($response, 'contact.php');
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'contact.page.twig');
     });
     
     $app->get('/request-consultation', function (Request $request, Response $response) {
-        global $renderer;
-        return $renderer->render($response, 'request_consultation.php');
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'request_consultation.page.twig');
     });
     
     $app->post('/process-consultation-form', function (Request $request, Response $response) {

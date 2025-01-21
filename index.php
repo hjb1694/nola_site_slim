@@ -3,6 +3,8 @@
 use Slim\Factory\AppFactory;
 use Slim\Views\PhpRenderer;
 use Dotenv\Dotenv;
+use Slim\Views\Twig;
+use Slim\Views\TwigMiddleware;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -15,10 +17,10 @@ $app = AppFactory::create();
 
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, true, true);
+$twig = Twig::create(__DIR__ . '/views', ['cache' => false]);
+$app->add(TwigMiddleware::create($app, $twig));
 
-$renderer = new PhpRenderer(__DIR__ . '/views');
-
-use_router($app, $renderer);
+use_router($app);
 
 $app->run();
 
