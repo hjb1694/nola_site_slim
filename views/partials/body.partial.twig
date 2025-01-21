@@ -1,6 +1,8 @@
 <body>
 {% include 'partials/header.partial.twig' %}
-{% block contents %}{% endblock %}
-{% include 'partials/footer.partial.twig' %}
+    <main>
+        {% block contents %}{% endblock %}
+        {% include 'partials/footer.partial.twig' %}
+    </main>
 {% block scripts %}{% endblock %}
 </body>
