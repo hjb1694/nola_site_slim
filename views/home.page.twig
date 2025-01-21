@@ -5,45 +5,19 @@
     {% endblock head %}
     {% block body %}
         {% embed 'partials/body.partial.twig' %}
-        {% block contents %}
-        {% include 'partials/home/hero.partial.twig' %}
-        {% include 'partials/home/checkered_services.partial.twig' %}
-        {% include 'partials/home/features.partial.twig' %}
-        {% include 'partials/home/stats.partial.twig' %}
-        {% include 'partials/home/testimonials.partial.twig' %}
-        {% endblock contents %}
-        {% block scripts %}
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script src="/public/assets/js/countUp.umd.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-        <script>
-
-            const statsSection = document.querySelector('.stats');
-
-            const savedFigureCountup = new countUp.CountUp('saved-figure', 1000);
-            const helpedClientFigureCountup = new countUp.CountUp('helped-clients-figure', 100);
-
-            new Swiper('.swiper', {
-                loop: true,
-                autoplay: true,
-                slidesPerView: 1,
-                centeredSlides: true,
-                autoHeight: true
-            });
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting){
-                        savedFigureCountup.start();
-                        helpedClientFigureCountup.start();
-                    }
-                })
-            });
-
-            observer.observe(statsSection);
-            AOS.init();
-        </script>
-        {% endblock scripts %}
+            {% block contents %}
+                {% include 'partials/home/hero.partial.twig' %}
+                {% include 'partials/home/checkered_services.partial.twig' %}
+                {% include 'partials/home/features.partial.twig' %}
+                {% include 'partials/home/stats.partial.twig' %}
+                {% include 'partials/home/testimonials.partial.twig' %}
+            {% endblock contents %}
+            {% block scripts %}
+                <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+                <script src="/public/assets/js/countUp.umd.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+                <script src="/public/assets/js/home.min.js"></script>
+            {% endblock scripts %}
         {% endembed %}
     {% endblock body %}
 {% endembed %}
