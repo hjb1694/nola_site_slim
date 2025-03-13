@@ -852,4 +852,12 @@ a.link-btn:link,
 
 }
 
+@media (max-width: 350px) {
+    .header {
+        h1 {
+            font-size:2rem;
+        }
+    }
+}
+
 
