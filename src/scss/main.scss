@@ -359,9 +359,16 @@ a.link-btn:link,
 
 .footer {
     padding: 6rem 0;
-    background: #fff;
+    background: #000;
+    color: #eee;
     text-align:center;
     font-size: 1.6rem;
+
+    &__author-link,
+    &__author-link:link,
+    &__author-link:visited {
+        color: #eee;
+    }
 }
 
 .main-view {
