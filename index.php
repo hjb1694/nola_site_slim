@@ -11,7 +11,8 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = DotEnv::createImmutable(__DIR__);
 $dotenv->load();
 
-require './router/router.php';
+require __DIR__ . '/router/router.php';
+require __DIR__ . '/util/verify_captcha.php';
 
 $app = AppFactory::create();
 

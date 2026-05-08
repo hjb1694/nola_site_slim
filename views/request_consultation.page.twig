@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group">
                             <div class="text-field">
-                                <input type="text" name="phone" id="phone" class="text-field__input" placeholder=" "/>
+                                <input type="text" name="phone" id="phone" class="text-field__input" inputmode="numeric" placeholder=" "/>
                                 <label for="phone" class="text-field__label">Phone</label>
                             </div>
                         </div>
@@ -89,6 +89,9 @@
                                 </div>
                             </fieldset>
                         </div>
+                        <div class="form-group">
+                            <div class="h-captcha" data-sitekey="6c50ffb6-840e-4cc0-a51e-f5589a6ab912"></div>
+                        </div>
                         <ul class="errbox"></ul>
                         <div class="form-group">
                             <button type="submit" class="subbut">Submit</button>
@@ -98,8 +101,14 @@
             </div>
             {% endblock contents %}
             {% block scripts %}
+                <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
                 <script src="https://unpkg.com/imask@7.6.1/dist/imask.js"></script>
-                <script src="/public/assets/js/consultation.min.js"></script>
+                <script src="/public/assets/js/consultation.min.js?v=3"></script>
+                <script>
+                    if(window.screen && window.screen.width < 700){
+                        document.querySelector('.h-captcha').setAttribute('data-size','compact');
+                    }
+                </script>
             {% endblock scripts %}
         {% endembed %}
     {% endblock body %}

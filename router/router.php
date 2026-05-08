@@ -35,9 +35,14 @@ function use_router($app){
                 !isset($body["phone"]) ||
                 !isset($body["prefer_contact_method"]) || 
                 !isset($body["best_time_contact"]) || 
-                !isset($body["interests"])
+                !isset($body["interests"]) ||
+                !isset($body["h-captcha-response"])
             ){
                 throw new Exception('Missing Data', 422);
+            }
+
+            if(verifyCaptchaToken($body['h-captcha-response'], $_SERVER['REMOTE_ADDR'])[0] === false){
+                throw new Exception('false captcha', 422);
             }
 
             $full_name_input = handle_incoming_input($body["full_name"]);
@@ -78,7 +83,7 @@ function use_router($app){
 
 
         }catch(Exception $e){
-            $payload = ["error_message" => $e->getMessage()];
+            $payload = json_encode(["error_message" => $e->getMessage()]);
             $code = 500;
             if($e->getCode > 400){
                 $code = $e->getCode();

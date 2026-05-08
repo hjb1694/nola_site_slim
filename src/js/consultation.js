@@ -1,12 +1,14 @@
 const phoneInput = document.querySelector('#phone');
 const consultForm = document.querySelector('#consult-form');
 const errbox = document.querySelector('.errbox');
+let hcaptchaToken;
 
 const phoneMaskOptions = {
     mask: '(000) 000-0000'
 }
 
 IMask(phoneInput, phoneMaskOptions);
+
 
 
 const resetForm = (fields) => {
@@ -63,6 +65,12 @@ const validate = (fields) => {
     (!fields.bestTimeToContact.value) && errs.push('Please select a best time to contact.');
     (!getInterestValues(fields.interests).length) && errs.push('Please select at least one topic of interest.');
 
+    if(document.getElementsByName("h-captcha-response").length && document.getElementsByName("h-captcha-response")[0].value){
+        hcaptchaToken = document.getElementsByName("h-captcha-response")[0].value;
+    }else{
+        errs.push('Please complete the anti-spam challenge.');
+    }
+
     if(errs.length){
         for(let err of errs){
             errbox.insertAdjacentHTML('beforeend', `<li>${err}</li>`);
@@ -86,7 +94,12 @@ const submit = async evt => {
         interests: document.getElementsByName('interest')
     }
 
-    if(!validate(fields)) return;
+    if(!validate(fields)){
+        if(hcaptcha){
+            hcaptcha.reset();
+        }
+        return;
+    }
 
     try{
 
@@ -97,6 +110,7 @@ const submit = async evt => {
         fd.append('prefer_contact_method', fields.preferContactMethod.value);
         fd.append('best_time_contact', fields.bestTimeToContact.value);
         fd.append('interests', getInterestValues(fields.interests).join(', '));
+        fd.append('h-captcha-response', hcaptchaToken);
 
         const response = await fetch('/process-consultation-form', {
             mode: 'no-cors',
@@ -113,6 +127,11 @@ const submit = async evt => {
     }catch(err){
         console.error(err);
         errbox.insertAdjacentHTML('beforeend', `<li>An error has occurred.</li>`);
+    }finally{
+        hcaptchaToken = null;
+        if(hcaptcha){
+            hcaptcha.reset();
+        }
     }
 
 }
