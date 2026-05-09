@@ -48,6 +48,9 @@
                                 <div class="form-group">
                                     <textarea name="message-body" id="message-body" class="textarea" placeholder="Your Message Here..."></textarea>
                                 </div>
+                                <div class="form-group">
+                                    <div class="h-captcha" data-sitekey="6c50ffb6-840e-4cc0-a51e-f5589a6ab912"></div>
+                                </div>
                                 <ul class="errbox"></ul>
                                 <div class="form-group">
                                     <button type="submit" class="subbut">Submit</button>
@@ -58,7 +61,13 @@
                 </div>
             {% endblock contents %}
             {% block scripts %}
-                <script src="/public/assets/js/contact.min.js"></script>
+                <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+                <script src="/public/assets/js/contact.min.js?v=3"></script>
+                <script>
+                    if(window.screen && window.screen.width < 700){
+                        document.querySelector('.h-captcha').setAttribute('data-size','compact');
+                    }
+                </script>
             {% endblock scripts %}
         {% endembed %}
     {% endblock body %}

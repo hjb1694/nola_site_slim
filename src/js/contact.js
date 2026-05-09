@@ -2,6 +2,8 @@ const contactSubmitButton = document.querySelector('.subbut');
 const contactForm = document.querySelector('#contact-form');
 const errbox = document.querySelector('.errbox');
 
+let hcaptchaToken;
+
 const resetForm = (fields) => {
     for(let field of Object.values(fields)){
         field.value = '';
@@ -19,6 +21,12 @@ const validate = (fields) => {
     (!emailRegExp.test(fields.email.value.trim())) && errs.push('Please enter a valid email address.');
     (fields.subject.value.trim().length < 1) && errs.push('Please enter a subject.');
     (fields.messageBody.value.trim().length < 10) && errs.push('Please include an adequate message body.');
+
+    if(document.getElementsByName("h-captcha-response").length && document.getElementsByName("h-captcha-response")[0].value){
+        hcaptchaToken = document.getElementsByName("h-captcha-response")[0].value;
+    }else{
+        errs.push('Please complete the anti-spam challenge.');
+    }
 
 
     if(errs.length){
@@ -42,7 +50,12 @@ const submitForm = async (evt) => {
         messageBody: document.querySelector('#message-body')
     }
 
-    if(!validate(fields)) return;
+    if(!validate(fields)){
+        if(hcaptcha){
+            hcaptcha.reset();
+        }
+        return;
+    };
 
     try{
 
@@ -51,6 +64,7 @@ const submitForm = async (evt) => {
         fd.append('email', fields.email.value.trim());
         fd.append('subject', fields.subject.value.trim());
         fd.append('message_contents', fields.messageBody.value.trim());
+        fd.append('h-captcha-response', hcaptchaToken);
 
         const response = await fetch('/process-contact-form', {
             mode: 'no-cors',
@@ -68,6 +82,11 @@ const submitForm = async (evt) => {
         console.error(err);
         errbox.classList.add('render');
         errbox.insertAdjacentHTML('beforeend', '<li>An error has occurred.</li>');
+    }finally{
+        hcaptchaToken = null;
+        if(hcaptcha){
+            hcaptcha.reset();
+        }
     }
 }
 
